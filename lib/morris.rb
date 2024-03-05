@@ -34,6 +34,19 @@ module Morris
     end
   end
 
+  class AccountNotFoundError < Error
+    attr_reader :additional_data
+
+    def initialize(msg = "Morris could not find account requested", additional_data: {})
+      super(msg)
+      @additional_data = additional_data
+    end
+
+    def to_honeybadger_context
+      additional_data
+    end
+  end
+
   class RetryableError < Error; end
 
   class MediaRequestTimedOutError < RetryableError
