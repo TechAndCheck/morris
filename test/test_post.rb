@@ -23,9 +23,9 @@ class PostTest < Minitest::Test
     assert !post.video_file_name.start_with?("https://")
   end
 
-  # def test_a_post_has_been_removed
-  #   assert_raises Morris::ContentUnavailableError do
-  #     Morris::Post.lookup(["sfhslsfjdls"])
-  #   end
-  # end
+  def test_a_post_has_been_removed
+    assert_raises Morris::ContentUnavailableError do
+      Morris::Post.lookup(["sfhslsfjdls"])
+    end
+  end
 end

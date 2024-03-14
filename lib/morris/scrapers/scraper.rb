@@ -21,6 +21,7 @@ options.add_argument("--enable-features=NetworkService,NetworkServiceInProcess")
 options.add_argument("user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 13_3_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36")
 options.add_preference "password_manager_enabled", false
 options.add_argument("--user-data-dir=/tmp/tarun_morris_#{SecureRandom.uuid}")
+options.add_argument("--mute-audio")
 
 Capybara.register_driver :selenium_morris do |app|
   client = Selenium::WebDriver::Remote::Http::Curb.new

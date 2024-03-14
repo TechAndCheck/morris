@@ -23,7 +23,8 @@ module Morris
 
       start_time = Time.now
       filename = "#{Morris.temp_storage_location}/morris_media_#{SecureRandom.uuid}.mp4"
-      line = Terrapin::CommandLine.new("yt-dlp", "-f :filetype -o :filename :url")
+      # line = Terrapin::CommandLine.new("yt-dlp", "-f :filetype -o :filename :url")
+      line = Terrapin::CommandLine.new("yt-dlp", "-f 0 -o :filename :url")
 
       line.run(filename: filename,
                filetype: "mp4",

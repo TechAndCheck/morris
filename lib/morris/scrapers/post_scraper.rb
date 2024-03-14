@@ -15,11 +15,30 @@ module Morris
 
       Capybara.app_host = "https://tiktok.com"
 
+      # Clean up the url
+      uri = URI.parse(url)
+
+      url = "#{uri.scheme}://#{uri.host}#{uri.path}"
+
       # Get the page
-      visit(url)
+      begin
+        visit(url)
+      rescue Addressable::URI::InvalidURIError
+        raise Morris::ContentUnavailableError.new
+      end
 
       # Grab the JSON
       element = page.all(:xpath, '//*[@id="__UNIVERSAL_DATA_FOR_REHYDRATION__"]', visible: false).first
+
+      # If the element is not found, raise a ContentUnavailableError
+      if element.nil?
+        begin
+          page.find(class: "not-found")
+        rescue Capybara::ElementNotFound
+          raise Morris::ContentUnavailableError.new
+        end
+      end
+
       text = element.text(:all) # Gotta get the hiddent text of the element
       json = JSON.parse(text)
 
