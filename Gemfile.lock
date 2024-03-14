@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    morris (0.1.0)
+    morris (0.1.2)
       apparition
       capybara
       oj
